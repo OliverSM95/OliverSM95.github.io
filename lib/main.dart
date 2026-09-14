@@ -5,6 +5,7 @@ import 'pages/home_page.dart';
 import 'pages/projects_page.dart';
 import 'pages/uofg_page.dart';
 import 'theme/app_theme.dart';
+import 'pages/coop_page.dart';
 
 void main() {
   runApp(const PortfolioApp());
@@ -25,6 +26,7 @@ class PortfolioApp extends StatelessWidget {
         '/experience': (_) => const ExperiencePage(),
         '/projects': (_) => const ProjectsPage(),
         '/uofg': (_) => const UofGPage(),
+        '/coop': (_) => const CoopPage(),
       },
     );
   }

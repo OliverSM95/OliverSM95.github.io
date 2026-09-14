@@ -54,13 +54,18 @@ class UofGPage extends StatelessWidget {
                         const _InfoPanel(
                           icon: Icons.school_outlined,
                           title: 'Degree',
-                          description: 'Degree title, major, academic focus, expected graduation, and academic goals.',
+                          description:
+                              'Degree title, major, academic focus, expected graduation, and academic goals.',
                           items: [
                             'Program / major',
                             'Academic focus',
                             'Honours / achievements',
                           ],
                         ),
+
+                        const SizedBox(height: 24),
+
+                        const _CoopPanel(),
 
                         const SizedBox(height: 24),
 
@@ -173,6 +178,98 @@ class _InfoPanel extends StatelessWidget {
                   Expanded(child: Text(item)),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+class _CoopPanel extends StatelessWidget {
+  const _CoopPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(28),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppColors.purple.withValues(alpha: .30),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.purple.withValues(alpha: .08),
+            blurRadius: 30,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.purple.withValues(alpha: .12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.work_outline,
+                  color: AppColors.neonPurple,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  'Co-op',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          Text(
+            'Work Term I',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+
+          const SizedBox(height: 6),
+
+          const Text(
+            'COOP*1000*01',
+            style: TextStyle(
+              color: AppColors.neonPurple,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          Text(
+            'Magna Exteriors — Polycon Industries',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+
+          const SizedBox(height: 24),
+
+          OutlinedButton.icon(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/coop',
+              );
+            },
+            icon: const Icon(
+              Icons.article_outlined,
+            ),
+            label: const Text(
+              'View Work Term Report',
             ),
           ),
         ],

@@ -38,7 +38,7 @@ class HeroSection extends StatelessWidget {
         ),
         const SizedBox(height: 18),
         Text(
-          'One-line role, focus, or personal statement.',
+          'Software Engineer - Driven by Curiosity, Growth, and Challenge',
           textAlign: mobile ? TextAlign.center : TextAlign.left,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
@@ -46,7 +46,7 @@ class HeroSection extends StatelessWidget {
         SizedBox(
           width: 620,
           child: Text(
-            'Brief introduction describing who you are, what you work on, and what visitors can find throughout the portfolio.',
+            'I’m someone who is motivated by growth and challenge. I like putting myself in unfamiliar situations, figuring things out, and pushing beyond what I already know. I’m self-directed, persistent, and comfortable taking initiative, while also valuing leadership, communication, and learning from the people around me.',
             textAlign: mobile ? TextAlign.center : TextAlign.left,
             style: Theme.of(context).textTheme.bodyLarge,
           ),

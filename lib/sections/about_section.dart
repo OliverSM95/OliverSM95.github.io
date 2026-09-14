@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import '../widgets/resume_embed.dart';
 import '../theme/app_theme.dart';
 import '../utils/breakpoints.dart';
 import '../utils/constants.dart';
@@ -122,11 +122,29 @@ class AboutSection extends StatelessWidget {
                 }).toList(),
               ),
 
-              const SizedBox(height: 42),
+              const SizedBox(height: 70),
+              Text(
+                'Resume',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+
+              const SizedBox(height: 12),
+
+              Text(
+                'A detailed overview of my education, experience, projects, and technical skills.',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+
+              const SizedBox(height: 28),
+
+              const ResumeEmbed(),
+
+              const SizedBox(height: 24),
+
               FilledButton.icon(
                 onPressed: _openResume,
-                icon: const Icon(Icons.description_outlined),
-                label: const Text('View Resume'),
+                icon: const Icon(Icons.open_in_new),
+                label: const Text('Open Resume'),
               ),
             ],
           ),

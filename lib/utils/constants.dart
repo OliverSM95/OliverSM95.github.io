@@ -3,11 +3,11 @@ class AppConstants {
 
   static const String githubUrl = 'https://github.com/OliverSM95';
 
-  static const String linkedinUrl = 'https://www.linkedin.com/in/YOUR-LINKEDIN';
+  static const String linkedinUrl = 'https://www.linkedin.com/in/oliver-s-b60b54231';
 
-  static const String instagramUrl = 'https://www.instagram.com/YOUR-INSTAGRAM';
+  static const String instagramUrl = 'https://www.instagram.com/oliver_sm.06';
 
-  static const String emailUrl = 'mailto:YOUR-EMAIL@example.com';
+  static const String emailUrl = 'mailto:olisimm2006@gmail.com';
 
   static const String headshotPath = 'assets/images/headshot.jpg';
 
@@ -18,5 +18,5 @@ class AppConstants {
   ];
 
   // Flutter web serves declared assets beneath /assets/.
-  static const String resumeWebPath = 'assets/assets/documents/resume.pdf';
+  static const String resumeWebPath = '/assets/documents/Oliver_Simm_Resume_2026-2.pdf';
 }

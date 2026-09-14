@@ -8,6 +8,10 @@ import '../widgets/experience_card.dart';
 import '../widgets/footer.dart';
 import '../widgets/navbar.dart';
 
+import '../data/technology_experiences.dart';
+import '../models/technology_experience.dart';
+import '../widgets/technology_card.dart';
+
 class ExperiencePage extends StatelessWidget {
   const ExperiencePage({super.key});
 
@@ -68,29 +72,68 @@ class ExperiencePage extends StatelessWidget {
 
                         const SizedBox(height: 80),
 
+                        const SizedBox(height: 80),
+
+                        const Text(
+                          'TOOLS & EXPERIENCE',
+                          style: TextStyle(
+                            color: AppColors.neonPurple,
+                            letterSpacing: 3,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+
+                        const SizedBox(height: 14),
+
                         Text(
-                          'Skills & Applications',
+                          'What I\'ve Worked With',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
-                        const SizedBox(height: 30),
 
-                        const Wrap(
-                          spacing: 18,
-                          runSpacing: 18,
-                          children: [
-                            _SkillPanel(
-                              title: 'Work Projects',
-                              text: 'Summary of major projects completed through employment or professional experience.',
-                            ),
-                            _SkillPanel(
-                              title: 'Tech Stack',
-                              text: 'Programming languages, frameworks, platforms, databases, and development tools.',
-                            ),
-                            _SkillPanel(
-                              title: 'Skills / Applications',
-                              text: 'Technical applications, software, transferable skills, and specialized abilities.',
-                            ),
-                          ],
+                        const SizedBox(height: 14),
+
+                        Text(
+                          'A closer look at the tools and platforms I have used professionally and the work I have done with each of them.',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+
+                        const SizedBox(height: 50),
+
+                        _TechnologyGroup(
+                          title: 'Work Projects & Platforms',
+                          technologies: technologyExperiences
+                              .where(
+                                (technology) =>
+                                    technology.category ==
+                                    TechnologyCategory.workProject,
+                              )
+                              .toList(),
+                        ),
+
+                        const SizedBox(height: 60),
+
+                        _TechnologyGroup(
+                          title: 'Development Stack',
+                          technologies: technologyExperiences
+                              .where(
+                                (technology) =>
+                                    technology.category ==
+                                    TechnologyCategory.techStack,
+                              )
+                              .toList(),
+                        ),
+
+                        const SizedBox(height: 60),
+
+                        _TechnologyGroup(
+                          title: 'Tools & Applications',
+                          technologies: technologyExperiences
+                              .where(
+                                (technology) =>
+                                    technology.category ==
+                                    TechnologyCategory.application,
+                              )
+                              .toList(),
                         ),
                       ],
                     ),
@@ -129,31 +172,57 @@ class _ExperienceGroup extends StatelessWidget {
     );
   }
 }
-
-class _SkillPanel extends StatelessWidget {
+class _TechnologyGroup extends StatelessWidget {
   final String title;
-  final String text;
+  final List<TechnologyExperience> technologies;
 
-  const _SkillPanel({required this.title, required this.text});
+  const _TechnologyGroup({
+    required this.title,
+    required this.technologies,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 340,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 12),
-          Text(text, style: Theme.of(context).textTheme.bodyMedium),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+
+        const SizedBox(height: 28),
+
+        LayoutBuilder(
+          builder: (context, constraints) {
+            const spacing = 18.0;
+
+            int columns = 1;
+
+            if (constraints.maxWidth >= 1050) {
+              columns = 3;
+            } else if (constraints.maxWidth >= 700) {
+              columns = 2;
+            }
+
+            final cardWidth =
+                (constraints.maxWidth - (spacing * (columns - 1))) / columns;
+
+            return Wrap(
+              spacing: spacing,
+              runSpacing: spacing,
+              children: technologies.map((technology) {
+                return SizedBox(
+                  width: cardWidth,
+                  child: TechnologyCard(
+                    technology: technology,
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
+      ],
     );
   }
 }
