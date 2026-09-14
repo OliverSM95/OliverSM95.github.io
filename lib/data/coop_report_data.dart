@@ -361,6 +361,10 @@ Many of the most important skills, however, were developed on the job. Through p
       path: 'assets/images/teamphoto.jpeg',
       caption: 'Polycon IT Team.',
     ),
+    CoopReportImage(
+      path: 'assets/images/coop/polycon-golf.jpg',
+      caption: 'Polycon Golf Tournament.',
+    ),
   ],
 
   // ===========================================================================

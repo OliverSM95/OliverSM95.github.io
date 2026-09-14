@@ -134,6 +134,7 @@ class CoopPage extends StatelessWidget {
                           title: 'Job Description',
                           paragraphs: report.jobDescription,
                           images: report.jobImages,
+                          stackImages: true,
                         ),
 
                         // =====================================================
@@ -224,11 +225,13 @@ class _ReportSection extends StatelessWidget {
   final String title;
   final List<String> paragraphs;
   final List<CoopReportImage> images;
+  final bool stackImages;
 
   const _ReportSection({
     required this.title,
     this.paragraphs = const [],
     this.images = const [],
+    this.stackImages = false,
   });
 
   @override
@@ -238,23 +241,28 @@ class _ReportSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Purple divider above heading.
           const _SectionMarker(),
 
           const SizedBox(height: 14),
 
-          Text(title, style: Theme.of(context).textTheme.headlineMedium),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
 
-          // Only create paragraph spacing if there is actual text.
           if (_hasParagraphs) ...[
             const SizedBox(height: 26),
-            _ParagraphList(paragraphs: paragraphs),
+            _ParagraphList(
+              paragraphs: paragraphs,
+            ),
           ],
 
-          // Only create image spacing if images exist.
           if (images.isNotEmpty) ...[
             const SizedBox(height: 32),
-            _ImageGallery(images: images),
+            _ImageGallery(
+              images: images,
+              stacked: stackImages,
+            ),
           ],
         ],
       ),
@@ -262,7 +270,9 @@ class _ReportSection extends StatelessWidget {
   }
 
   bool get _hasParagraphs {
-    return paragraphs.any((paragraph) => paragraph.trim().isNotEmpty);
+    return paragraphs.any(
+      (paragraph) => paragraph.trim().isNotEmpty,
+    );
   }
 }
 
@@ -541,8 +551,12 @@ class _ParagraphList extends StatelessWidget {
 
 class _ImageGallery extends StatelessWidget {
   final List<CoopReportImage> images;
+  final bool stacked;
 
-  const _ImageGallery({required this.images});
+  const _ImageGallery({
+    required this.images,
+    this.stacked = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -550,8 +564,28 @@ class _ImageGallery extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    // Stack every image vertically at full width.
+    if (stacked) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: images.asMap().entries.map((entry) {
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: entry.key == images.length - 1 ? 0 : 32,
+            ),
+            child: _ReportImage(
+              image: entry.value,
+            ),
+          );
+        }).toList(),
+      );
+    }
+
+    // Normal responsive gallery behaviour.
     if (images.length == 1) {
-      return _ReportImage(image: images.first);
+      return _ReportImage(
+        image: images.first,
+      );
     }
 
     return LayoutBuilder(
@@ -569,7 +603,9 @@ class _ImageGallery extends StatelessWidget {
           children: images.map((image) {
             return SizedBox(
               width: imageWidth,
-              child: _ReportImage(image: image),
+              child: _ReportImage(
+                image: image,
+              ),
             );
           }).toList(),
         );
