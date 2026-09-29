@@ -12,9 +12,12 @@ class AppConstants {
   static const String headshotPath = 'assets/images/headshot.jpg';
 
   static const List<String> aboutGallery = [
-    'assets/images/gallery_1.jpg',
-    'assets/images/gallery_2.jpg',
-    'assets/images/gallery_3.jpg',
+    'assets/images/Altaf.jpeg',
+    'assets/images/Elvis.jpeg',
+    'assets/images/PuppYoga.jpeg',
+    'assets/images/Christmas.png',
+    'assets/images/school/GDGteam.jpeg',
+    'assets/images/coop/polycon-golf.JPG',
   ];
 
   // Flutter web serves declared assets beneath /assets/.

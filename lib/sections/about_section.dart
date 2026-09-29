@@ -68,14 +68,15 @@ class AboutSection extends StatelessWidget {
                         .map(
                           (image) => SizedBox(
                             width: galleryWidth,
-                            height: 220,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(16),
                               child: Image.asset(
                                 image,
-                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
                                 errorBuilder: (_, _, _) {
                                   return Container(
+                                    height: 220,
                                     color: AppColors.surfaceLight,
                                     child: const Center(
                                       child: Icon(
