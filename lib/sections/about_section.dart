@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web/web.dart' as web;
+
+import '../widgets/about_gallery.dart';
 import '../widgets/resume_embed.dart';
 import '../theme/app_theme.dart';
 import '../utils/breakpoints.dart';
@@ -9,7 +12,8 @@ class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   Future<void> _openResume() async {
-    final uri = Uri.base.resolve(AppConstants.resumeWebPath);
+    final uri = Uri.parse(web.document.baseURI)
+        .resolve(AppConstants.resumeWebPath);
 
     await launchUrl(uri);
   }
@@ -55,46 +59,7 @@ class AboutSection extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  final galleryWidth = constraints.maxWidth >= 800
-                      ? (constraints.maxWidth - 24) / 3
-                      : constraints.maxWidth;
-
-                  return Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: AppConstants.aboutGallery
-                        .map(
-                          (image) => SizedBox(
-                            width: galleryWidth,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.asset(
-                                image,
-                                width: double.infinity,
-                                fit: BoxFit.contain,
-                                errorBuilder: (_, _, _) {
-                                  return Container(
-                                    height: 220,
-                                    color: AppColors.surfaceLight,
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.photo_outlined,
-                                        color: AppColors.purple,
-                                        size: 40,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  );
-                },
-              ),
+              const AboutGallery(),
 
               const SizedBox(height: 42),
               Text(
@@ -124,10 +89,7 @@ class AboutSection extends StatelessWidget {
               ),
 
               const SizedBox(height: 70),
-              Text(
-                'Resume',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+              Text('Resume', style: Theme.of(context).textTheme.headlineMedium),
 
               const SizedBox(height: 12),
 

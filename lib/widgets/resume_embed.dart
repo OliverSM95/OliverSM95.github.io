@@ -22,19 +22,19 @@ class _ResumeEmbedState extends State<ResumeEmbed> {
 
     _viewType = 'resume-pdf-${identityHashCode(this)}';
 
-    ui_web.platformViewRegistry.registerViewFactory(
-      _viewType,
-      (int viewId) {
-        final iframe = web.HTMLIFrameElement()
-          ..src = Uri.base.resolve(AppConstants.resumeWebPath).toString()
-          ..style.width = '100%'
-          ..style.height = '100%'
-          ..style.border = 'none'
-          ..style.borderRadius = '16px';
+    ui_web.platformViewRegistry.registerViewFactory(_viewType, (int viewId) {
+      final iframe = web.HTMLIFrameElement()
+        ..src = Uri.parse(web.document.baseURI)
+            .resolve(AppConstants.resumeWebPath)
+            .toString()
+        ..title = 'Oliver Simm resume'
+        ..style.width = '100%'
+        ..style.height = '100%'
+        ..style.border = 'none'
+        ..style.borderRadius = '16px';
 
-        return iframe;
-      },
-    );
+      return iframe;
+    });
   }
 
   @override
@@ -47,9 +47,7 @@ class _ResumeEmbedState extends State<ResumeEmbed> {
       decoration: BoxDecoration(
         color: AppColors.surfaceLight,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.purple.withValues(alpha: .35),
-        ),
+        border: Border.all(color: AppColors.purple.withValues(alpha: .35)),
         boxShadow: [
           BoxShadow(
             color: AppColors.purple.withValues(alpha: .10),
@@ -58,9 +56,7 @@ class _ResumeEmbedState extends State<ResumeEmbed> {
         ],
       ),
       clipBehavior: Clip.antiAlias,
-      child: HtmlElementView(
-        viewType: _viewType,
-      ),
+      child: HtmlElementView(viewType: _viewType),
     );
   }
 }

@@ -32,8 +32,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Test web assets and gallery layout
+        run: flutter test
+
       - name: Build Flutter web
         run: flutter build web --release --base-href "/"
+
+      - name: Verify published assets
+        run: python3 tool/verify_web_assets.py
 
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
@@ -55,4 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
