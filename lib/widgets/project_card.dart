@@ -30,6 +30,7 @@ class ProjectCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
@@ -52,66 +53,66 @@ class ProjectCard extends StatelessWidget {
               },
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(22),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    project.title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    project.description,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(22),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  project.title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  project.description,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 18),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: project.technologies.map((tech) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.purple.withValues(alpha: .10),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        tech,
+                        style: const TextStyle(
+                          color: AppColors.neonPurple,
+                          fontSize: 12,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                if (project.githubUrl != null || project.liveUrl != null)
                   const SizedBox(height: 18),
+                if (project.githubUrl != null || project.liveUrl != null)
                   Wrap(
                     spacing: 8,
-                    runSpacing: 8,
-                    children: project.technologies.map((tech) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
+                    children: [
+                      if (project.githubUrl != null)
+                        TextButton.icon(
+                          onPressed: () => _open(project.githubUrl!),
+                          icon: const Icon(Icons.code),
+                          label: const Text('Source'),
                         ),
-                        decoration: BoxDecoration(
-                          color: AppColors.purple.withValues(alpha: .10),
-                          borderRadius: BorderRadius.circular(20),
+                      if (project.liveUrl != null)
+                        TextButton.icon(
+                          onPressed: () => _open(project.liveUrl!),
+                          icon: const Icon(Icons.open_in_new),
+                          label: const Text('View'),
                         ),
-                        child: Text(
-                          tech,
-                          style: const TextStyle(
-                            color: AppColors.neonPurple,
-                            fontSize: 12,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    ],
                   ),
-                  const Spacer(),
-                  if (project.githubUrl != null || project.liveUrl != null)
-                    Wrap(
-                      spacing: 8,
-                      children: [
-                        if (project.githubUrl != null)
-                          TextButton.icon(
-                            onPressed: () => _open(project.githubUrl!),
-                            icon: const Icon(Icons.code),
-                            label: const Text('Source'),
-                          ),
-                        if (project.liveUrl != null)
-                          TextButton.icon(
-                            onPressed: () => _open(project.liveUrl!),
-                            icon: const Icon(Icons.open_in_new),
-                            label: const Text('View'),
-                          ),
-                      ],
-                    ),
-                ],
-              ),
+              ],
             ),
           ),
         ],

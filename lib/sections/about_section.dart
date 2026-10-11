@@ -21,7 +21,7 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-
+    /*
     const skills = [
       'Skill / Technology',
       'Skill / Application',
@@ -29,7 +29,7 @@ class AboutSection extends StatelessWidget {
       'Interest',
       'Interest',
       'Interest',
-    ];
+    ];*/
 
     return Container(
       width: double.infinity,
@@ -60,13 +60,14 @@ class AboutSection extends StatelessWidget {
               const SizedBox(height: 40),
 
               const AboutGallery(),
-
+              /*
               const SizedBox(height: 42),
               Text(
                 'Skills & Interests',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 18),
+              
               Wrap(
                 spacing: 10,
                 runSpacing: 10,
@@ -86,17 +87,17 @@ class AboutSection extends StatelessWidget {
                     child: Text(skill),
                   );
                 }).toList(),
-              ),
+              ),*/
 
               const SizedBox(height: 70),
               Text('Resume', style: Theme.of(context).textTheme.headlineMedium),
 
               const SizedBox(height: 12),
-
+/*
               Text(
                 'A detailed overview of my education, experience, projects, and technical skills.',
                 style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              ),*/
 
               const SizedBox(height: 28),
 

@@ -10,7 +10,7 @@ class AppConstants {
 
   static const String emailUrl = 'mailto:olisimm2006@gmail.com';
 
-  static const String headshotPath = 'assets/images/headshot.jpg';
+  static const String headshotPath = 'assets/images/Headshot-Colored-offWhitebackground.png';
 
   // Web-sized derivatives; dimensions reserve space before decoding completes.
   static const List<({String path, double aspectRatio})> aboutGallery = [

@@ -63,20 +63,18 @@ class ProjectsPage extends StatelessWidget {
                               columns = 2;
                             }
 
-                            return GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: projects.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: columns,
-                                    crossAxisSpacing: 22,
-                                    mainAxisSpacing: 22,
-                                    mainAxisExtent: 440,
-                                  ),
-                              itemBuilder: (_, index) {
-                                return ProjectCard(project: projects[index]);
-                              },
+                            return Wrap(
+                              spacing: 22,
+                              runSpacing: 22,
+                              children: projects.map((project) {
+                                return SizedBox(
+                                  width:
+                                      (constraints.maxWidth -
+                                          22 * (columns - 1)) /
+                                      columns,
+                                  child: ProjectCard(project: project),
+                                );
+                              }).toList(),
                             );
                           },
                         ),
